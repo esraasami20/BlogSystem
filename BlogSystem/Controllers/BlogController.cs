@@ -75,6 +75,9 @@ namespace BlogSystem.Controllers
                 blog.BlogId = id;
                 var result = await _blogService.EditBlogAsync(blog, file);
                 if (result != null)
+        
+                    
+                    
                     return NoContent();
                 return NotFound();
             }

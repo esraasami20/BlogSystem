@@ -17,6 +17,11 @@ namespace BlogSystem.Services
         {
             _db = db;
         }
+        //get all unapproved comment
+        public List<Comment> getUnApproved()
+        {
+            return _db.Comments.Where(a => a.IsAppeoved == false).Include(a=>a.Vistor).ThenInclude(a=>a.Comments).ThenInclude(a=>a.Blog).ThenInclude(a=>a.Comments).ToList();
+        }
         //get all comments for spicific blog
         public Response GetApprivedCommentForSpicificBlog(int id)
         {
@@ -36,7 +41,7 @@ namespace BlogSystem.Services
             else
                 return new Response { Status = "Error", Message = "Blog Not Found" };
         }
-
+        
 
         // get all comments for spicific Vistor
         public Response GetNotApprovedCommentForBlog(int id, IIdentity vistor)

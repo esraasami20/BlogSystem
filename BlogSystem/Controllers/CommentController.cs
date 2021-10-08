@@ -21,7 +21,11 @@ namespace BlogSystem.Controllers
         {
             _commentService = commentService;
         }
-
+        [HttpGet]
+        public ActionResult<List<Comment>> getComment()
+        {
+            return _commentService.getUnApproved();
+        }
         //get all Approved comments for spicific blog
         [HttpGet("approved-comment/{BlogId}")]
         public ActionResult<Response> getAppCommById(int BlogId)
@@ -95,7 +99,7 @@ namespace BlogSystem.Controllers
         //approve Comment
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        //[Authorize(Roles = "Moderator")]
+        [Authorize(Roles = "Moderator")]
         public ActionResult approveComment(int id)
         {
 

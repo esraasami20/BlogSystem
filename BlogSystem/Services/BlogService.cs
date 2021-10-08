@@ -22,7 +22,7 @@ namespace BlogSystem.Services
         //get all blogs
         public List<Blog> GetBlogs()
         {
-            return _db.Blogs.Include(a => a.Category).ThenInclude(a => a.Blogs).ThenInclude(a => a.Comments).ThenInclude(a => a.Blog).ToList();
+            return _db.Blogs.Include(a => a.Category).ThenInclude(a => a.Blogs).ThenInclude(a => a.Comments).ThenInclude(a=>a.Vistor).ThenInclude(a=>a.Comments).ThenInclude(a => a.Blog).ToList();
         }
 
         //get blog by id
