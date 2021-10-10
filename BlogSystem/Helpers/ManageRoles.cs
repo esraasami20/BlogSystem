@@ -37,7 +37,7 @@ namespace BlogSystem.Helpers
                     }
                     return true;
 
-                }
+                } 
                 catch (Exception e)
                 {
                     return false;

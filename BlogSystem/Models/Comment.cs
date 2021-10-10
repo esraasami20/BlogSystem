@@ -18,7 +18,8 @@ namespace BlogSystem.Models
 
         [DefaultValue(false)]
         public bool IsAppeoved { get; set; }
-
+        [MaxLength(200), MinLength(3)]
+        public string reason { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

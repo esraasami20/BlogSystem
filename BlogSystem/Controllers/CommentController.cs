@@ -1,4 +1,5 @@
-﻿using BlogSystem.Helpers;
+﻿using BlogSystem.DTO;
+using BlogSystem.Helpers;
 using BlogSystem.Models;
 using BlogSystem.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -66,8 +67,8 @@ namespace BlogSystem.Controllers
 
         //add comment
         [HttpPost("{BlogId}")]
-        [Authorize(Roles = "Vistor")]
-        public ActionResult AddReviewToProduct(int BlogId, [FromBody] Comment comment)
+        //[Authorize(Roles = "Vistor")]
+        public ActionResult AddCommentToBlog(int BlogId, [FromBody] Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -97,16 +98,18 @@ namespace BlogSystem.Controllers
 
 
         //approve Comment
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderator")]
-        public ActionResult approveComment(int id)
+        [HttpPut("approve/{id}")]
+        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Moderator")]
+        public ActionResult approveComment(int id, [FromBody] ApproveComment approveComent)
         {
 
-            var result = _commentService.ApproveBlogComment(id);
-            if (result)
+            var result = _commentService.ApproveBlogComment(id, approveComent);
+            if (result!=null)
                 return NoContent();
             return NotFound();
         }
+
+        
     }
 }

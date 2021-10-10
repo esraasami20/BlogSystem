@@ -58,10 +58,8 @@ namespace BlogSystem.Services
             {
                 if (file != null)
                 {
-
                     // delete old image
-
-                    File.Delete(blogDetails.Image);
+                    //File.Delete(blogDetails.Image);
 
                     // create new image
                     string imagepath = await FileHelper.SaveImageAsync(blogDetails.BlogId, file, "Blogs");
@@ -69,12 +67,23 @@ namespace BlogSystem.Services
                 }
                 blogDetails.BlogName = blog.BlogName;
                 blogDetails.BlogBody = blog.BlogBody;
+                blogDetails.CategoryId = blog.CategoryId;
 
                 _db.SaveChanges();
             }
             return blogDetails;
         }
 
+        //private int deleteImage(string path)
+        //{
+        //    //var filePath = System.Web.HttpContext.Current.Server.MapPath(path);
+        //    var filePath = Microsoft.AspNetCore.Http.HttpContext.Current.Server.MapPath(path);
+        //    if (File.Exists(filePath))
+        //    {
+        //        File.Delete(filePath);
+        //    }
+        //    return 1;
+        //}
 
         //delete blog
         public Response DeleteBlog(int id)

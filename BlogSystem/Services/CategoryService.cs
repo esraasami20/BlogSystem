@@ -32,7 +32,7 @@ namespace BlogSystem.Services
         //get category by id
         public Category GetCategory(int id)
         {
-            return _db.Categories.Include(a => a.Blogs).FirstOrDefault(a => a.CategoryId == id);
+            return _db.Categories.Include(a => a.Blogs).ThenInclude(a=>a.Comments).ThenInclude(a=>a.Blog).FirstOrDefault(a => a.CategoryId == id);
         }
 
         //add categoey

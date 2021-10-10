@@ -37,7 +37,7 @@ namespace BlogSystem.Helpers
             {
                 newFileName = id + "." + imagePosition + fileExtension;
             }
-            string filePath = Path.Combine("Files/Images/" + path, newFileName);
+            string filePath = Path.Combine("Files/" + path, newFileName);
 
             using (Stream fileStream = new FileStream(filePath, FileMode.Create))
             {

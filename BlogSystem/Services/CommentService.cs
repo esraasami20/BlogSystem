@@ -1,4 +1,5 @@
-﻿using BlogSystem.Helpers;
+﻿using BlogSystem.DTO;
+using BlogSystem.Helpers;
 using BlogSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -89,19 +90,49 @@ namespace BlogSystem.Services
 
 
         //approve comment
-        public bool ApproveBlogComment(int id)
-        {
+        //public bool ApproveBlogComment(int id)
+        //{
 
+        //    Comment comment = _db.Comments.FirstOrDefault(a => a.CommentId == id);
+        //    if (comment != null)
+        //    {
+        //        comment.IsAppeoved = true;
+        //        _db.SaveChanges();
+        //        return true;
+        //    }
+        //    return false;
+
+        //}
+
+        public Comment ApproveBlogComment(int id, ApproveComment approveComment)
+        {
+           // Moderator moderator = _db.Moderators.Include(r => r.ApplicationUser).FirstOrDefault(s => s.ModeratorId == HelperMethods.GetAuthnticatedUserId(user));
+            //ApplicationUser admin = _db.Users.FirstOrDefault(s => s.Id == HelperMethods.GetAuthnticatedUserId(user));
             Comment comment = _db.Comments.FirstOrDefault(a => a.CommentId == id);
             if (comment != null)
             {
-                comment.IsAppeoved = true;
+                comment.IsAppeoved = approveComment.IsAppeoved;
+                comment.reason = approveComment.reason;
                 _db.SaveChanges();
-                return true;
             }
-            return false;
-
+            return comment;
         }
+
+        //public Comment DisApproveBlogComment(int id, ApproveComment approveComment)
+        //{
+        //    // Moderator moderator = _db.Moderators.Include(r => r.ApplicationUser).FirstOrDefault(s => s.ModeratorId == HelperMethods.GetAuthnticatedUserId(user));
+        //    //ApplicationUser admin = _db.Users.FirstOrDefault(s => s.Id == HelperMethods.GetAuthnticatedUserId(user));
+        //    Comment comment = _db.Comments.FirstOrDefault(a => a.CommentId == id);
+        //    if (comment != null)
+        //    {
+        //        comment.IsAppeoved = approveComment.IsAppeoved;
+        //        comment.reason = approveComment.reason;
+        //        _db.SaveChanges();
+        //    }
+        //    return comment;
+        //}
+
+
 
         private void UpdateBlogComment(int blogId)
         {

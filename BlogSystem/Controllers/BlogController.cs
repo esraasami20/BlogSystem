@@ -44,7 +44,7 @@ namespace BlogSystem.Controllers
 
         //add blog
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<Blog>> AddCategoryAsync([FromForm] Blog blog, IFormFile file)// not swagger [from form]
         {
             if (!ModelState.IsValid)
@@ -61,8 +61,8 @@ namespace BlogSystem.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Moderator")]
+        //[Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Moderator")]
         public async Task<ActionResult<Blog>> EditBlogAsync(int id, [FromForm] Blog blog, IFormFile file)// not swagger [from form]
         {
 
